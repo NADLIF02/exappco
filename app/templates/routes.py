@@ -17,4 +17,4 @@ def login():
         # Ajouter la logique de vérification ici
         session['logged_in'] = True
         return redirect(url_for('.home'))
-    return render_template('login.html')
+    return render_template('auth/login.html')
