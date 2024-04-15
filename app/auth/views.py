@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from .forms import LoginForm  # Import correct du formulaire
 
-auth = Blueprint('auth', __name__)
+auth_bp = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
