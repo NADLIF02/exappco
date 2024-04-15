@@ -1,11 +1,28 @@
 version: '3.8'
 services:
-  web:
+  webapp:
     build: .
     ports:
       - "5000:5000"
-    volumes:
-      - ./app:/app
     environment:
-      - FLASK_ENV=development
-    restart: on-failure
+      - DATABASE_URL=mysql+pymysql://webapp:password@db/webappdb
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: webappdb
+      MYSQL_USER: webapp
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
