@@ -1,19 +1,24 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
-from .forms import EventForm  # Import correct du formulaire
+from flask import render_template, redirect, url_for, flash, session
+from .forms import LeaveRequestForm
+from .models import LeaveRequest, db
 
-calendar = Blueprint('calendar', __name__)
-
-@calendar.route('/', methods=['GET', 'POST'])
-def display():
+def new_leave():
     if not session.get('logged_in'):
         return redirect(url_for('auth.login'))
-    form = EventForm()  # Création d'une instance du formulaire
+    form = LeaveRequestForm()
     if form.validate_on_submit():
-        event_date = form.event_date.data
-        description = form.description.data
-        # Ajouter l'événement dans la base de données
-        flash('Event added successfully!', 'success')
-        return redirect(url_for('.display'))
-    # Récupérer les événements de la base de données pour les afficher
-    events = [{'date': datetime.today(), 'description': 'Sample Event'}]  # Remplacer par des données réelles
-    return render_template('event_calendar/calendar.html', form=form, events=events)
+        leave_request = LeaveRequest(
+            employee_name=form.employee_name.data,
+            start_date=form.start_date.data,
+            end_date=form.end_date.data,
+            reason=form.reason.data
+        )
+        db.session.add(leave_request)
+        db.session.commit()
+        flash('Leave request submitted successfully!')
+        return redirect(url_for('.view_calendar'))
+    return render_template('event_calendar/submit_leave.html', form=form)
+
+def view_calendar():
+    leave_requests = LeaveRequest.query.all()
+    return render_template('event_calendar/view_calendar.html', leave_requests=leave_requests)
