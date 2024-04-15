@@ -1,21 +1,21 @@
-# Utilisation d'une image de base Python
+# Use an official Python runtime as a parent image
 FROM python:3.8-slim
 
-# Définir le répertoire de travail
+# Set the working directory in the container to /app
 WORKDIR /app
 
-# Copy the dependencies file to the working directory
-COPY requirements.txt .
-
-# Installer les dépendances
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
-
-# Copier les fichiers nécessaires
+# Copy the current directory contents into the container at /app
 COPY . /app
 
-# Exposer le port sur lequel l'application va tourner
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Make port 5000 available to the world outside this container
 EXPOSE 5000
 
-# Commande pour démarrer l'application
+# Define environment variable
+ENV NAME World
+
+# Run app.py when the container launches
 CMD ["python", "app.py"]
+
