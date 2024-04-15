@@ -3,7 +3,7 @@ from . import calendar
 from .forms import EventForm
 from datetime import datetime
 
-@calendar.route('/calendar', methods=['GET', 'POST'])
+@calendar.route('/event_calendar', methods=['GET', 'POST'])
 def display():
     if not session.get('logged_in'):
         return redirect(url_for('auth.login'))
