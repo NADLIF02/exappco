@@ -10,7 +10,7 @@ def create_app():
 
     # Import the event_calendar Blueprint and its routes beforehand
     from .event_calendar import event_calendar as calendar_blueprint
-    from .event_calendar import routes  # Import routes before registering the blueprint
+       # from .event_calendar import routes  # Import routes before registering the blueprint
     app.register_blueprint(calendar_blueprint, url_prefix='/calendar')
 
     return app
