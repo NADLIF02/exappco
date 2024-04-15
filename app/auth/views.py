@@ -1,6 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session, flash
-
-auth = Blueprint('auth', __name__)
+from . import auth
+from flask import render_template, request, redirect, url_for, session, flash
 
 USERS = {
     "admin": "admin123",
