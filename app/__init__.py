@@ -1,3 +1,4 @@
+# app/__init__.py
 from flask import Flask
 
 def create_app():
@@ -6,7 +7,5 @@ def create_app():
 
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
-
-    # Include other blueprint registrations if any
 
     return app
