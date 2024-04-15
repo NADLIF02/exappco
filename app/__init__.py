@@ -2,12 +2,12 @@ from flask import Flask
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'votre_cle_secrete_ici'
+    app.secret_key = 'your_secret_key'
 
-    from .auth import auth as auth_blueprint
-    from .calendar import calendar as calendar_blueprint
+    from .auth.views import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
-    app.register_blueprint(auth_blueprint)
+    from .event_calendar.views import calendar as calendar_blueprint
     app.register_blueprint(calendar_blueprint, url_prefix='/calendar')
 
     return app
