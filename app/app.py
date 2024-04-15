@@ -1,5 +1,5 @@
 from flask import render_template, redirect, url_for, session
-from .event_calendar.forms import EventForm 
+from app.event_calendar.forms import EventForm
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
