@@ -1,6 +1,5 @@
-# app/event_calendar/routes.py
-from . import event_calendar  # Import Blueprint instance
+from . import event_calendar
 
 @event_calendar.route('/')
 def index():
-    return "Event Calendar Home"
+    return "Welcome to the Event Calendar!"
