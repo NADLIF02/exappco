@@ -2,4 +2,4 @@ from flask import Blueprint
 
 auth = Blueprint('auth', __name__)
 
-import app.auth.routes
+from . import routes  # Relative import of routes within the same Blueprint package
