@@ -1,10 +1,6 @@
-from flask import Flask
+from flask import Blueprint
 
-def create_app():
-    app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'votre_cle_secrete_ici'
+event_calendar = Blueprint('event_calendar', __name__)
 
-    from .routes import main
-    app.register_blueprint(main)
-
-    return app
+# Import routes at the end of the file to avoid circular import issues
+from . import routes
