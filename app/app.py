@@ -18,7 +18,7 @@ def login():
         # Ajouter la logique de vérification ici
         session['logged_in'] = True
         return redirect(url_for('home'))
-    return render_template('login.html')
+    return render_template('auth/login.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
