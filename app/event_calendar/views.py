@@ -16,4 +16,4 @@ def display():
         return redirect(url_for('.display'))
     # Récupérer les événements de la base de données pour les afficher
     events = [{'date': datetime.today(), 'description': 'Sample Event'}]  # Remplacer par des données réelles
-    return render_template('calendar/calendar.html', form=form, events=events)
+    return render_template('event_calendar/calendar.html', form=form, events=events)
