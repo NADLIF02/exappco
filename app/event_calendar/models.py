@@ -1,4 +1,4 @@
-from app import db
+from app import db  # Ensure this is importing from __init__.py, not app.py
 
 class LeaveRequest(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -6,6 +6,3 @@ class LeaveRequest(db.Model):
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=False)
     reason = db.Column(db.String(200))
-
-    def __repr__(self):
-        return f'<LeaveRequest {self.employee_name} from {self.start_date} to {self.end_date}>'
