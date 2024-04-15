@@ -1,16 +1,24 @@
-from flask import render_template, request, redirect, url_for, session, flash
-from . import auth
-from .forms import LoginForm
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 
-@auth.route('/login', methods=['GET', 'POST'])
+app = Flask(__name__)
+app.secret_key = 'votre_cle_secrete_ici'
+
+# Identifiants de test
+USERS = {
+    "admin": "admin123",
+    "user": "password"
+}
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
-        # Logique de vérification des identifiants ici
-        # Supposons une vérification réussie :
-        session['logged_in'] = True
-        flash('You have been logged in.', 'success')
-        return redirect(url_for('calendar.display'))
-    return render_template('auth/login.html', form=form)
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if username in USERS and USERS[username] == password:
+            session['logged_in'] = True
+            session['username'] = username
+            flash('Vous êtes maintenant connecté!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Identifiant ou mot de passe incorrect!', 'error')
+    return render_template('auth/login.html')
