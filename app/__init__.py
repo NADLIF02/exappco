@@ -8,6 +8,6 @@ def create_app():
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
     from .event_calendar.views import calendar as calendar_blueprint
-    app.register_blueprint(calendar_blueprint, url_prefix='/calendar')
+    app.register_blueprint(calendar_blueprint, url_prefix='/event_calendar')
 
     return app
