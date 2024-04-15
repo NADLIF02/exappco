@@ -9,6 +9,7 @@ COPY . /app
 
 # Installer les dépendances
 RUN pip install -r requirements.txt
-
+# Exposer le port sur lequel l'application va tourner
+EXPOSE 5000
 # Commande pour démarrer l'application
 CMD ["python", "app.py"]
